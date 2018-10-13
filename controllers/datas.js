@@ -1,5 +1,9 @@
 const argv = require('yargs').argv;
 const request = require('request');
+<<<<<<< HEAD
+=======
+let apiKey = '*';
+>>>>>>> be8efadb0778d628cfdcc52d8b8a45b700fb593f
 
 module.exports = (app) => {
 
