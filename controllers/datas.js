@@ -1,16 +1,17 @@
 const argv = require('yargs').argv;
 const request = require('request');
-let apiKey = '8ab2dcf2e766a0cfb3ff7dd4baf947f4';
 
 module.exports = (app) => {
 
+    //HOME PAGE
     app.get('/', (req, res) => {
-        res.render('index');
+        res.render('home-data');
     });
     
+    //CITY REQUEST
     app.post('/', (req, res) => {
         let city = argv.c || req.body.city
-        let url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`
+        let url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.apiKey}`
         request(url, (err, res, body) => {
         if(err){
             console.log('error:', err);
@@ -21,7 +22,7 @@ module.exports = (app) => {
             console.log('Message:', message)
         }
     });
-        res.render('index')
+        res.render('home-data')
         console.log(req.body.city)
     })
 

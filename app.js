@@ -3,6 +3,7 @@ const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 const app = express();
 
+require('dotenv').config();
 
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true, newUrlParser: true }));
