@@ -1,14 +1,18 @@
 
 <div class="jumbotron">
-  <h1 class="display-4">Hello, world!</h1>
-  <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+  <h1 class="display-4">Howdy!</h1>
+  <p class="lead">Please enter a location!</p>
   <hr class="my-4">
  <fieldset>
-        <form action="/" method="post">
+        <form action="/" method="POST">
           <input name="city" type="text" class="ghost-input btn-lg btn-block" placeholder="Enter a City" required>
           <input type="submit" class="btn btn-primary btn-lg btn-block" value="Get Weather">
         </form>
 </fieldset>
+<div class="container">
+    <h1>{{weather}}</h1>
+    <h1>{{error}}</h1>
+</div>
 </div>
 
        

@@ -2,28 +2,42 @@ const argv = require('yargs').argv;
 const request = require('request');
 
 module.exports = (app) => {
+    
+    let appid = process.env.apiKey
 
     //HOME PAGE
     app.get('/', (req, res) => {
         res.render('home-data');
     });
-    
-    //CITY REQUEST
+
+
     app.post('/', (req, res) => {
-        let city = argv.c || req.body.city
-        let url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.apiKey}`
-        request(url, (err, res, body) => {
-        if(err){
-            console.log('error:', err);
-        } else {
+        let city = req.body.city;
+        let url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${appid}`
+      
+        request(url, (err, response, body) => {
+            
+          if(err){
+
+            res.render('home-data', {weather: null, error: 'Error, please try again'});
+
+          } else {
+
             let weather = JSON.parse(body)
-            let message = `It's ${weather.main.temp} degrees in ${weather.name}!`;
-            console.log('body', body)
-            console.log('Message:', message)
-        }
-    });
-        res.render('home-data')
-        console.log(req.body.city)
-    })
+
+            if(weather.main == undefined){
+
+              res.render('home-data', {weather: null, error: 'Error, please try again'});
+
+            } else {
+
+              let weatherText = `It's ${weather.main.temp} degrees in ${weather.name}!`;
+              res.render('home-data', {weather: weatherText, error: null});
+
+            }
+          }
+        });
+      })
+    
 
 }
